@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#ffffff">
+<title>TutoresOn-Line</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="app">
+<header class="bar"><div class="in">
+  <a class="brand" href="#" data-go="home"><span class="logo">T</span>TutoresOn-Line</a>
+  <nav id="menu" class="menu" aria-label="Principal">
+    <a href="#" data-go="results">Buscar Tutores</a>
+    <a href="#" data-go="login" id="navLogin">Iniciar Sesión</a>
+    <a href="#" data-go="register" class="accent" id="navReg">Registrarse</a>
+    <a href="#" id="navOut" hidden>Cerrar Sesión</a>
+  </nav>
+  <button class="icon-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+</div></header>
+
+<!-- ========== INICIO ========== -->
+<section class="view" id="home" aria-label="Inicio">
+
+  <main>
+    <section class="hero">
+      <h1>Encuentra al tutor perfecto para ti</h1>
+      <p>Conectamos estudiantes con tutores calificados para clases de cualquier materia, nivel educativo y modalidad (en línea o presencial).</p>
+      <form class="box" id="heroForm">
+        <label for="fSubject">Materia</label>
+        <input id="fSubject" placeholder="Ej. Álgebra, Inglés...">
+        <label for="fLevel">Nivel Educativo</label>
+        <input id="fLevel" placeholder="Primaria, Universidad...">
+        <label for="fLoc">Ubicación</label>
+        <input id="fLoc" placeholder="Ej. Bogotá, Medellín...">
+        <button class="btn primary" type="submit">Buscar Tutores</button>
+      </form>
+    </section>
+
+    <section class="sec line" id="how">
+      <h2 class="center">Cómo Funciona</h2>
+      <ol class="steps">
+        <li><span class="num">1</span><h3>Busca tu tutor</h3><p>Filtra por materia, nivel escolar y zona geográfica para encontrar las mejores opciones.</p></li>
+        <li><span class="num">2</span><h3>Reserva una sesión</h3><p>Elige el horario disponible que mejor se adapte a tu rutina y necesidades.</p></li>
+        <li><span class="num">3</span><h3>Aprende a tu manera</h3><p>Toma la clase de forma presencial o a través de nuestra videoconferencia integrada.</p></li>
+      </ol>
+    </section>
+
+    <section class="sec line">
+      <h2 class="center">Tutores Destacados</h2>
+      <div class="list" id="featured"></div>
+    </section>
+
+    <section class="sec alt line">
+      <h2 class="center">Materias Populares</h2>
+      <div class="chips" id="subjects"></div>
+    </section>
+
+    <section class="sec">
+      <h2>Lo que dicen nuestros estudiantes</h2>
+      <blockquote class="card quote"><p>"Gracias a las clases de matemáticas logré aprobar mi examen de admisión universitaria. El tutor explicó todo de forma paciente."</p><footer><span class="avatar xs">EG</span><b>Eduardo Gómez, Estudiante de Preparatoria</b></footer></blockquote>
+      <blockquote class="card quote"><p>"Las clases presenciales me permitieron resolver mis dudas de física avanzada de una manera súper práctica y dinámica."</p><footer><span class="avatar xs">MS</span><b>Mariana Silva, Estudiante de Ingeniería</b></footer></blockquote>
+    </section>
+
+    <footer class="foot">
+      <h3>TutoresOn-Line</h3>
+      <p>La plataforma líder de tutorías en línea y presenciales en América Latina.</p>
+      <h4>Plataforma</h4>
+      <a href="#" data-go="results">Buscar Tutores</a>
+      <a href="#how" data-scroll="how">Cómo Funciona</a>
+      <a href="#" data-go="dash">Registrarse</a>
+    </footer>
+  </main>
+</section>
+
+<!-- ========== RESULTADOS ========== -->
+<section class="view" id="results" aria-label="Resultados" hidden>
+  <main class="pad" id="rmain">
+    <div class="row between">
+      <h2 class="h-sm"><span id="count">0</span> <span id="countLbl">tutores disponibles</span></h2>
+      <button class="btn outline sm" id="filtersBtn" aria-expanded="false" aria-controls="filters">⚙ Filtros</button>
+    </div>
+    <div class="row sort"><label for="sort">Ordenar por:</label>
+      <select id="sort"><option value="rel">Relevancia</option><option value="price">Menor precio</option><option value="rating">Mejor calificación</option></select>
+    </div>
+    <form class="box" id="filters">
+      <label for="q">Buscar por nombre o palabra clave</label><input id="q" placeholder="Ej. cálculo, TOEFL...">
+      <label for="sSubject">Materia</label><select id="sSubject"><option value="">Todos</option></select>
+      <label for="sLevel">Nivel educativo</label><select id="sLevel"><option value="">Todos</option></select>
+      <label for="sMode">Modalidad</label><select id="sMode"><option value="">Todos</option><option>Online</option><option>Presencial</option></select>
+      <label for="sLoc">Ubicación</label><select id="sLoc"><option value="">Todos</option></select>
+      <label for="sPrice">Precio máximo por hora</label>
+      <select id="sPrice"><option value="">Todos</option><option value="80000">$80.000 COP</option><option value="150000">$150.000 COP</option><option value="200000">$200.000 COP</option></select>
+      <button type="button" class="link" id="clear">Limpiar todos los filtros</button>
+    </form>
+    <div class="list" id="resultList" aria-live="polite"></div>
+  </main>
+</section>
+
+<!-- ========== PERFIL ========== -->
+<section class="view" id="profile" aria-label="Perfil del tutor" hidden><main class="pad" id="profileBox"></main></section>
+
+<!-- ========== LOGIN ========== -->
+<section class="view" id="login" aria-label="Iniciar sesión" hidden><main class="auth">
+  <h1 class="center">Iniciar Sesión</h1><p class="sub center muted">Bienvenido de nuevo a TutoresOn-Line</p>
+  <form class="box" id="loginForm" novalidate>
+    <label for="lEmail">Correo Electrónico</label><input id="lEmail" name="email" type="email" autocomplete="email" placeholder="juan@ejemplo.com">
+    <label for="lPw">Contraseña</label><input id="lPw" name="pw" type="password" autocomplete="current-password" placeholder="Tu contraseña">
+    <p class="err" id="loginErr" role="alert"></p>
+    <button class="btn primary" type="submit">Iniciar Sesión</button>
+  </form>
+  <p class="center alt-link">¿No tienes cuenta? <a href="#" class="blue" data-go="register">Regístrate</a></p>
+</main></section>
+
+<!-- ========== REGISTRO ========== -->
+<section class="view" id="register" aria-label="Crear cuenta" hidden><main class="auth">
+  <h1 class="center">Crear una Cuenta</h1><p class="sub center muted">Únete a TutoresOn-Line hoy mismo</p>
+  <div class="seg" role="group" aria-label="Tipo de cuenta"><button type="button" class="on" data-role="student">Soy Estudiante</button><button type="button" data-role="tutor">Soy Tutor</button></div>
+  <form id="regForm" class="rform" novalidate>
+    <label for="rName">Nombre Completo</label><input id="rName" name="name" autocomplete="name" placeholder="Ej. Juan Pérez">
+    <label for="rEmail">Correo Electrónico</label><input id="rEmail" name="email" type="email" autocomplete="email" placeholder="juan@ejemplo.com">
+    <label for="rPw">Contraseña</label><input id="rPw" name="pw" type="password" autocomplete="new-password" placeholder="Mínimo 8 caracteres">
+    <label for="rPw2">Confirmar Contraseña</label><input id="rPw2" name="pw2" type="password" autocomplete="new-password" placeholder="Repite tu contraseña">
+    <div class="tutor-extra" id="tutorExtra" hidden>
+      <small class="cap">Información del tutor</small>
+      <label for="rSubj">Materia(s)</label><input id="rSubj" name="subj" placeholder="Ej. Matemáticas, Física">
+      <label for="rLevel">Nivel Educativo</label><input id="rLevel" name="level" placeholder="Ej. Universidad">
+      <label for="rLoc">Área Geográfica</label><input id="rLoc" name="loc" placeholder="Ej. Barranquilla">
+      <label for="rPrice">Tarifa por Hora (COP)</label><input id="rPrice" name="price" inputmode="numeric" placeholder="Ej. 100000">
+    </div>
+    <p class="err" id="regErr" role="alert"></p>
+    <button class="btn primary" type="submit">Crear Cuenta</button>
+  </form>
+  <p class="center alt-link">¿Ya tienes cuenta? <a href="#" class="blue" data-go="login">Inicia sesión</a></p>
+</main></section>
+
+<!-- ========== PANEL ESTUDIANTE ========== -->
+<section class="view" id="dash" aria-label="Panel estudiante" hidden>
+  <main class="pad has-nav">
+    <div class="row between dhead"><div><small class="cap">Panel estudiante</small><h1 class="h-md" id="dashHi"></h1></div><span class="avatar sm" id="dashAv"></span></div>
+    <h2 class="h-sm">Próximas Sesiones</h2>
+    <div class="list" id="upcoming"></div>
+    <h2 class="h-sm">Historial de Sesiones</h2>
+    <div class="box tight" id="history"></div>
+    <h2 class="h-sm">Tutores Favoritos</h2>
+    <div class="favs" id="favs"></div>
+  </main>
+</section>
+
+
+<!-- ========== PANEL TUTOR ========== -->
+<section class="view" id="dashTutor" aria-label="Panel tutor" hidden>
+  <main class="pad has-nav">
+
+    <div class="row between dhead">
+      <div>
+        <small class="cap">Panel del tutor</small>
+        <h1 class="h-md" id="tutorHi">Hola, tutor</h1>
+      </div>
+      <span class="avatar sm" id="tutorAv"></span>
+    </div>
+
+    <p class="muted" style="margin-top:12px">
+      Gestiona tu perfil profesional y tus tutorías.
+    </p>
+
+    <h2 class="h-sm">Resumen de actividad</h2>
+
+    <div class="tutor-stats">
+      <article class="card">
+        <small class="cap">Solicitudes pendientes</small>
+        <h2>0</h2>
+      </article>
+
+      <article class="card">
+        <small class="cap">Próximas sesiones</small>
+        <h2>0</h2>
+      </article>
+
+      <article class="card">
+        <small class="cap">Sesiones completadas</small>
+        <h2>0</h2>
+      </article>
+
+      <article class="card">
+        <small class="cap">Estado del perfil</small>
+        <h2 id="tutorStatus">Pendiente</h2>
+      </article>
+    </div>
+
+    <h2 class="h-sm">Mi espacio de trabajo</h2>
+
+    <div class="list">
+      
+<article class="card">
+  <h3>Mi perfil profesional</h3>
+
+  <p class="muted">
+    Información registrada en TutoresOn-Line.
+  </p>
+
+  <div id="tutorProfileInfo">
+    <p class="muted">Cargando información...</p>
+  </div>
+  
+<button
+  type="button"
+  class="btn outline"
+  id="editTutorProfileBtn"
+  style="margin-top: 16px"
+>
+  Editar mi perfil
+</button>
+
+<form id="editTutorProfileForm" hidden>
+
+  <h3 class="h-sm">Editar información profesional</h3>
+
+  <label for="editTutorMaterias">Materias</label>
+  <input
+    type="text"
+    id="editTutorMaterias"
+    placeholder="Ej. Matemáticas, Física"
+    required
+  >
+  <small class="muted">
+    Separa las materias mediante comas.
+  </small>
+
+  <label for="editTutorNivel">Nivel educativo</label>
+  <select id="editTutorNivel" required>
+    <option value="Primaria">Primaria</option>
+    <option value="Secundaria">Secundaria</option>
+    <option value="Preparatoria">Preparatoria</option>
+    <option value="Universidad">Universidad</option>
+  </select>
+
+  <label for="editTutorUbicacion">Ubicación</label>
+  <input
+    type="text"
+    id="editTutorUbicacion"
+    placeholder="Ej. Barranquilla"
+    required
+  >
+
+  <label for="editTutorPrecio">Tarifa por hora (COP)</label>
+  <input
+    type="number"
+    id="editTutorPrecio"
+    min="1000"
+    max="1000000"
+    step="1000"
+    required
+  >
+
+  <p id="editTutorProfileMsg" class="muted" role="status"></p>
+
+  <div class="row" style="gap: 12px; margin-top: 16px">
+    <button type="submit" class="btn primary">
+      Guardar cambios
+    </button>
+
+    <button
+      type="button"
+      class="btn outline"
+      id="cancelEditTutorProfile"
+    >
+      Cancelar
+    </button>
+  </div>
+
+</form>
+
+</article>
+  
+  
+<!-- ===== Disponibilidad del tutor ===== -->
+<article class="card">
+
+  <h3>Mi disponibilidad</h3>
+
+  <p class="muted">
+    Configura los días y horarios en los que puedes
+    ofrecer tutorías.
+  </p>
+
+  <div id="tutorDisponibilidad">
+
+    <h3 class="h-sm">Mis horarios disponibles</h3>
+
+    <div id="listaDisponibilidadTutor">
+      <p class="muted">Cargando horarios...</p>
+    </div>
+
+    <form id="formDisponibilidadTutor">
+
+      <h3 class="h-sm">Agregar horario</h3>
+
+      <label for="dispDia">Día de la semana</label>
+      <select id="dispDia" required>
+        <option value="">Selecciona un día</option>
+        <option value="Lunes">Lunes</option>
+        <option value="Martes">Martes</option>
+        <option value="Miércoles">Miércoles</option>
+        <option value="Jueves">Jueves</option>
+        <option value="Viernes">Viernes</option>
+        <option value="Sábado">Sábado</option>
+        <option value="Domingo">Domingo</option>
+      </select>
+
+      <label for="dispInicio">Hora de inicio</label>
+      <input type="time" id="dispInicio" required>
+
+      <label for="dispFin">Hora de finalización</label>
+      <input type="time" id="dispFin" required>
+
+      <p
+        id="mensajeDisponibilidadTutor"
+        class="muted"
+        role="status"
+      ></p>
+
+      <button type="submit" class="btn primary">
+        Agregar horario
+      </button>
+
+    </form>
+
+  </div>
+
+</article>
+
+  </main>
+</section>
+
+
+<nav class="tabbar" id="tabbar" aria-label="Navegación principal" hidden>
+  <button data-tab="dash" class="on"><i>📅</i>Sesiones</button>
+  <button data-tab="results"><i>🔍</i>Buscar</button>
+  <button data-tab="msg"><i>💬</i>Mensajes</button>
+  <button data-tab="me"><i>👤</i>Perfil</button>
+</nav>
+
+<div id="toast" role="status" aria-live="polite"></div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
